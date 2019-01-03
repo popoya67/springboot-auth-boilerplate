@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.sujin.app.exception.AuthenticationException;
+import kr.sujin.app.exception.AuthorizationException;
 import kr.sujin.app.exception.InvalidAccountException;
 
 @ControllerAdvice
@@ -16,5 +17,9 @@ public class ExceptionController {
 		mv.addObject(e.getClass() == InvalidAccountException.class ? "errorMsg" : "orgRequestUrl", e.getMessage());
 		return mv;
 	}
-
+	
+	@ExceptionHandler({ AuthorizationException.class})
+	public String authorizationException(Exception e) {
+		return "error/access_error";
+	}
 }

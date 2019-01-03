@@ -7,13 +7,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Login이 필요한 요청일 경우 사용한다.
+ * Admin권한이 있는 유저만 접근 가능하다.
  * @author leesujin
  *
  */
 @Target({ElementType.METHOD,ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface LoginRequired {
+@LoginRequired
+public @interface AdminOnly {
 
 }
