@@ -9,22 +9,25 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import kr.sujin.app.annotaion.AdminOnly;
 import kr.sujin.app.annotaion.LoginRequired;
+import kr.sujin.app.controller.LoginController;
 import kr.sujin.app.dto.User;
 import kr.sujin.app.exception.AuthenticationException;
 import kr.sujin.app.exception.AuthorizationException;
 
 @Configuration
 public class LoginInterceptor extends HandlerInterceptorAdapter {
+	private static final String ADMIN = "ADMIN";
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		if (handler instanceof HandlerMethod) {
 			HandlerMethod hm = (HandlerMethod) handler;
-			User sessionUser = (User) request.getSession().getAttribute("USER");
+			User sessionUser = (User) request.getSession().getAttribute(LoginController.LOGGED_USER);
 			if (hm.hasMethodAnnotation(LoginRequired.class) && sessionUser == null) {
 				throw new AuthenticationException(request.getRequestURI());
 			}
-			if(hm.hasMethodAnnotation(AdminOnly.class) && sessionUser.getAuthority() != "ADMIN") {
+			if(hm.hasMethodAnnotation(AdminOnly.class) && sessionUser.getAuthority() != ADMIN) {
 				throw new AuthorizationException();
 			}
 		}

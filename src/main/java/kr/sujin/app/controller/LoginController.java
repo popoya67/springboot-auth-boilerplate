@@ -13,6 +13,7 @@ import kr.sujin.app.service.UserService;
 
 @Controller
 public class LoginController {
+	public static final String LOGGED_USER = "LOGGED_USER";
 
 	@Autowired
 	private HttpSession session;
@@ -28,7 +29,7 @@ public class LoginController {
 	@PostMapping("login")
 	public String login(User user, @RequestParam String orgRequestUrl) {
 		User loginUser = userService.getUser(user);
-		session.setAttribute("USER", loginUser);
+		session.setAttribute(LOGGED_USER, loginUser);
 		return "redirect:" + (orgRequestUrl == null ? "home" : orgRequestUrl);
 	}
 
