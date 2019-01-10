@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <body>
     <%
-    	User loginUser = (User)session.getAttribute("USER");
+    	User loginUser = (User)session.getAttribute("LOGGED_USER");
     %>
     
         <h1>Welcome! <%=loginUser.getName() %></h1>

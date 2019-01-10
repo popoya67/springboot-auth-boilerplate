@@ -27,7 +27,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			if (hm.hasMethodAnnotation(LoginRequired.class) && sessionUser == null) {
 				throw new AuthenticationException(request.getRequestURI());
 			}
-			if(hm.hasMethodAnnotation(AdminOnly.class) && sessionUser.getAuthority() != ADMIN) {
+			if(hm.hasMethodAnnotation(AdminOnly.class) && !ADMIN.equals(sessionUser.getAuthority())) {
 				throw new AuthorizationException();
 			}
 		}

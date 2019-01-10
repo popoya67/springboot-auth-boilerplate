@@ -3,7 +3,7 @@
 <html lang="en">
        <body>
     <%
-    	User loginUser = (User)session.getAttribute("USER");
+    	User loginUser = (User)session.getAttribute("LOGGED_USER");
     %>
     
         <h1>Admin Home - <%=loginUser.getName() %></h1>
