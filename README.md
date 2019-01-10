@@ -2,11 +2,11 @@
 springboot-auth-boilerplate 
 
 # test 계정
-<commonUser> 
+commonUser -
 id: sujin
 pw: 1234
 
-<adminUser>
+adminUser -
 id: admin
 pw: 1234
 
